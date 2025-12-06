@@ -1,0 +1,47 @@
+# =========================================================================
+# BLACKCUBE-RS CONFIGURATION FILE TEMPLATE
+#
+# This template contains ALL required, but UNDOCUMENTED, fields needed
+# for the bot to launch successfully (as of Dec 2025).
+# =========================================================================
+
+# REQUIRED SECTION 1: BOT LOGIN
+[bot]
+prefix = "!" 
+# SECURITY FIX: Use the environment variable name here (e.g., DISCORD_TOKEN)
+# The actual token must be in your local .env file.
+discord_token = "YOUR_DISCORD_TOKEN_ENV_VARIABLE_NAME" 
+# REQUIRED FIELD
+application_id = 1234567890123456789  # Found in Discord Developer Portal
+
+# REQUIRED SECTION 2: S3-COMPATIBLE STORAGE (Using MinIO for local dev)
+[storage]
+# IMPORTANT: This must be a live S3 endpoint (e.g., MinIO or AWS S3).
+url = "http://127.0.0.1:9000"  # MinIO default API endpoint
+access_key = "MINIO_ROOT_USER_HERE" 
+secret_key = "MINIO_ROOT_PASSWORD_HERE"
+# This bucket must exist and be created in your S3/MinIO console.
+bucket_name = "local-data-bucket"
+storage_path = "/"
+
+# REQUIRED SECTION 3: SERVER/DISCORD CHANNELS
+[server]
+address = "127.0.0.1"
+port = 8000
+guild_id = 1234567890123456789       # Your Server ID
+request_channel_id = 1234567890123456789 # Channel for standard bot requests
+log_channel_id = 1234567890123456789     # Channel for bot status/logs
+command_channel_id = 1234567890123456789 # Channel for command input
+auth_role_id = 1234567890123456789       # Role ID required for admin commands
+
+# REQUIRED SECTION 4: BOT SETTINGS (STRUCTURALLY FLAWED PARSING)
+[settings]
+# NOTE: This field is REQUIRED HERE due to a bug in the bot's parser.
+# It logically belongs under [settings.bot_settings].
+image_types = ["png", "jpg", "jpeg", "gif", "webp"]
+
+[settings.logging]
+level = "info" # Standard logging level
+
+[settings.bot_settings]
+# This section is structurally required but has no fields remaining here.
